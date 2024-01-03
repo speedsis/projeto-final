@@ -29,11 +29,11 @@ import { z } from "zod";
 
 const rootDir = __dirname;
 const processEnvPort = process.env.PORT || process.env.PORT_API;
-const allowedCorsOrigins = parseCORSOrigin(process.env.CORS_ORIGIN_URL ?? "http://localhost:3000");
+const allowedCorsOrigins = ['*']; //parseCORSOrigin(process.env.CORS_ORIGIN_URL ?? "http://localhost:3000");
 
-if (process.env.NODE_ENV === "development") {
-  allowedCorsOrigins.push("http://localhost:6006");
-}
+// if (process.env.NODE_ENV === "development") {
+//   allowedCorsOrigins.push("http://localhost:6006");
+// }
 
 @Configuration({
   rootDir,
@@ -112,7 +112,7 @@ export class Server {
 
   public async $afterInit() {
     await checkForUpdates();
-    await this.handleUseUpload();
+    // await this.handleUseUpload();
   }
 
   // upload API & client URL for analytic purposes
