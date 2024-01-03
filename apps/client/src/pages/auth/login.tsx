@@ -35,7 +35,7 @@ export default function Login(props: Props) {
       <main className="flex flex-col items-center justify-center pt-20">
         <AuthScreenImages />
         <LocalhostDetector isLocalhost={props.isLocalhost} />
-        <ApiVerification isCORSError={props.isCORSError} CORS_ORIGIN_URL={props.CORS_ORIGIN_URL} />
+        {/* <ApiVerification isCORSError={props.isCORSError} CORS_ORIGIN_URL={props.CORS_ORIGIN_URL} /> */}
         <DemoDetector />
 
         <LoginForm onFormSubmitted={handleSubmit} />
@@ -71,14 +71,14 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, req }) =>
     false;
 
   const isDefaultENvValue = CORS_ORIGIN_URL === "http://192.168.x.x:3000";
-  const doURLsMatch = isWildcard
-    ? true
-    : CORS_ORIGIN_URL === NEXT_PUBLIC_CLIENT_URL && !isDefaultENvValue;
+  // const doURLsMatch = isWildcard
+  //   ? true
+  //   : CORS_ORIGIN_URL === NEXT_PUBLIC_CLIENT_URL && !isDefaultENvValue;
 
   return {
     props: {
       isLocalhost,
-      isCORSError: !doURLsMatch,
+      isCORSError: false,//!doURLsMatch,
       CORS_ORIGIN_URL,
       cad: data,
       userSavedLocale,
