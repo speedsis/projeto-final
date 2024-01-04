@@ -4,7 +4,11 @@ FROM node:18 as base
 
 RUN pnpm config set httpTimeout 1200000
 
-WORKDIR /snailycad 
+WORKDIR /snailycad
+
+COPY package.json pnpm-lock.yaml ./
+
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 COPY . ./
 
