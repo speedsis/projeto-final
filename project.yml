@@ -1,3 +1,0 @@
-services:
-  my-service:
-    image: my-service:latest
