@@ -1,12 +1,10 @@
+FROM node:18 as base
 
-
-FROM node:18 as base 
+RUN npm install -g pnpm
 
 RUN pnpm config set httpTimeout 1200000
 
 WORKDIR /snailycad
-
-RUN npm install -g pnpm
 
 COPY . ./
 

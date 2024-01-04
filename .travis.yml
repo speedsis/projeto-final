@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - 18.17
+
+jobs:
+  include:
+    - name: server
+      script:
+        - cd apps/api
+        - yarn install
+        - yarn build
+        - yarn start
+      deploy:
+        provider: heroku
+        app: api
+        api_key: fd128d84-ffeb-4093-bd64-0cb3988d635a
+
+    - name: client
+      script:
+        - cd apps/client
+        - yarn install
+        - yarn build
+        - yarn start
+      deploy:
+        provider: heroku
+        app: client
+        api_key: fd128d84-ffeb-4093-bd64-0cb3988d635a
