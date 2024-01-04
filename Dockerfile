@@ -1,14 +1,16 @@
 FROM node:18 as base
 
-# RUN npm install -g pnpm
+RUN npm install -g pnpm
 
 RUN pnpm config set httpTimeout 1200000
 
 WORKDIR /snailycad
 
-COPY package.json pnpm-lock.yaml ./
+# Instale o pnpm
+RUN curl -fsSL https://get.pnpm.io/install.sh | sh -s -- --version latest
 
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# Adicione o pnpm ao PATH
+ENV PATH="/snailycad/node_modules/.bin:$PATH"
 
 COPY . ./
 
