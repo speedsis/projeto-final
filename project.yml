@@ -2,49 +2,37 @@ version: "1"
 name: snaily-cad
 
 services:
-  # - name: postgres
-  #   type: postgres
-  #   container_name: "snaily-cad-postgres"
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_DB: ${POSTGRES_DB}
-  #     POSTGRES_PORT: ${DB_PORT}
-  #     POSTGRES_USER: ${POSTGRES_USER}
-  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-  #   ports:
-  #     - "${DB_PORT}:5432"
-  #   volumes:
-  #     - ./.data:/var/lib/postgresql/data
-  #   restart: unless-stopped
-
   - name: api
-    type: custom
-    container_name: "snaily-cad-api"
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      target: api
+    type: backend
+    # container_name: "snaily-cad-api"
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    #   target: api
     ports:
       - "${PORT_API}:${PORT_API}"
     # depends_on:
     #   - postgres
-    restart: always
+    # restart: always
     volumes:
       - ./apps/api/public:/snailycad/apps/api/public
+    environment:
+      NODE_ENV: production
 
   - name: client
     type: custom
-    container_name: "snaily-cad-client"
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      target: client
+    # container_name: "snaily-cad-client"
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    #   target: client
     ports:
       - "${PORT_CLIENT}:${PORT_CLIENT}"
     # depends_on:
     #   - postgres
-    restart: always
-
-networks:
-  - name: cad_web
-    external: true
+    # restart: always
+    environment:
+      NODE_ENV: production
+# networks:
+#   - name: cad_web
+#     external: true
