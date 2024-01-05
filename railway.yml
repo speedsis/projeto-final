@@ -1,9 +1,23 @@
 # railway.yml
 
-# Rota para o serviço API
-- source: api/
-  destination: api/
+version: 2
+services:
+  - name: api
+    env:
+      - NODE_ENV=production
+    startScript: pnpm turbo run build --filter=@snailycad/api
+    buildCommand: pnpm install
+    workdir: /snailycad/apps/api
+    routes:
+      - src: api/*
+        dest: api/
 
-# Rota para o serviço cliente
-- source: cad/
-  destination: client/
+  - name: client
+    env:
+      - NODE_ENV=production
+    startScript: pnpm turbo run build --filter=@snailycad/client
+    buildCommand: pnpm install
+    workdir: /snailycad/apps/client
+    routes:
+      - src: client/*
+        dest: client/
