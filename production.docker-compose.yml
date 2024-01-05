@@ -22,9 +22,9 @@ services:
       dockerfile: ./Dockerfile
       target: api
     ports:
-      - "${PORT_API}:${PORT_API}"
+      - "${PORT}:${PORT}"
     expose:
-      - ${PORT_API}
+      - ${PORT}
     depends_on:
       - postgres
     networks:

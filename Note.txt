@@ -1,0 +1,9 @@
+# railway.yml
+
+# Rota para o serviço API
+- source: api/
+  destination: api/
+
+# Rota para o serviço cliente
+- source: cad/
+  destination: client/

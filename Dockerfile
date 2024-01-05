@@ -34,7 +34,8 @@ RUN pnpm turbo run build --filter=@snailycad/client
 
 WORKDIR /snailycad/apps/client
 
-EXPOSE 80
+EXPOSE 8080
+EXPOSE 3000
 EXPOSE 443
 
 CMD ["pnpm", "start"]

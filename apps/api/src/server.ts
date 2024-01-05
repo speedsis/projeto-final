@@ -28,7 +28,7 @@ import { request } from "undici";
 import { z } from "zod";
 
 const rootDir = __dirname;
-const processEnvPort = process.env.PORT || process.env.PORT_API;
+const processEnvPort = process.env.PORT || process.env.PORT;
 const allowedCorsOrigins = parseCORSOrigin(process.env.CORS_ORIGIN_URL ?? "http://localhost:3000");
 
 if (process.env.NODE_ENV === "development") {
