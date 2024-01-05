@@ -19,5 +19,5 @@ services:
     buildCommand: pnpm install
     workdir: /snailycad/apps/client
     routes:
-      - src: client/*
+      - src: cad/*
         dest: client/
