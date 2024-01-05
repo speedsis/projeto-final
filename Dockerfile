@@ -4,7 +4,7 @@ RUN npm install -g pnpm
 
 RUN pnpm config set httpTimeout 1200000
 
-WORKDIR /snailycad
+WORKDIR /snailycad 
 
 COPY . ./
 
@@ -33,5 +33,8 @@ RUN pnpm create-images-domain
 RUN pnpm turbo run build --filter=@snailycad/client
 
 WORKDIR /snailycad/apps/client
+
+EXPOSE 80
+EXPOSE 443
 
 CMD ["pnpm", "start"]
