@@ -28,12 +28,17 @@ import { request } from "undici";
 import { z } from "zod";
 
 const rootDir = __dirname;
-const processEnvPort = process.env.PORT || process.env.PORT;
-const allowedCorsOrigins = parseCORSOrigin(process.env.CORS_ORIGIN_URL ?? "http://localhost:3000");
+const processEnvPort = process.env.PORT || process.env.PORT_API;
+// const allowedCorsOrigins = parseCORSOrigin(process.env.CORS_ORIGIN_URL ?? "http://localhost:3000");
+const allowedCorsOrigins = [
+  "http://localhost:3000",
+  "http://192.168.0.27:3000",
+  "https://cad.alphainnovate.com.br/", // Adicione o domínio do seu cliente
+];
 
-if (process.env.NODE_ENV === "development") {
-  allowedCorsOrigins.push("http://localhost:6006");
-}
+// if (process.env.NODE_ENV === "development") {
+//   allowedCorsOrigins.push("http://localhost:6006");
+// }
 
 @Configuration({
   rootDir,
@@ -62,8 +67,18 @@ if (process.env.NODE_ENV === "development") {
     compress(),
     json({ limit: "500kb" }),
     cors({
-      origin: allowedCorsOrigins,
-      credentials: true,
+      origin: (
+        origin: string | undefined,
+        callback: (error: Error | null, allow?: boolean) => void,
+      ) => {
+        // Se a origem não estiver na lista permitida, rejeite a solicitação
+        if (!origin || allowedCorsOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      // credentials: true, // se necessário
     }),
     Sentry.Handlers.requestHandler({
       request: true,
@@ -91,8 +106,9 @@ if (process.env.NODE_ENV === "development") {
     maxHttpBufferSize: 1e8, // 100 mb
     pingTimeout: 60000,
     cors: {
-      credentials: true,
-      origin: allowedCorsOrigins,
+      origin: "*",
+      // credentials: true,
+      // origin: allowedCorsOrigins,
     },
   },
 })

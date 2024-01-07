@@ -1,9 +1,13 @@
 # railway.yml
 
-# Rota para o serviço API
-- source: api/
-  destination: api/
+#precisando instalar
+npm install -g @railway/cli
 
-# Rota para o serviço cliente
-- source: cad/
-  destination: client/
+railway login
+
+railway link
+
+railway up  
+
+
+

@@ -12,12 +12,12 @@ services:
       - src: api/*
         dest: api/
 
-  - name: client
-    env:
-      - NODE_ENV=production
-    startScript: pnpm turbo run build --filter=@snailycad/client
-    buildCommand: pnpm install
-    workdir: /snailycad/apps/client
-    routes:
-      - src: cad/*
-        dest: client/
+  # - name: client
+  #   env:
+  #     - NODE_ENV=production
+  #   startScript: pnpm turbo run build --filter=@snailycad/client
+  #   buildCommand: pnpm install
+  #   workdir: /snailycad/apps/client
+  #   routes:
+  #     - src: cad/*
+  #       dest: client/

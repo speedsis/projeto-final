@@ -10,7 +10,7 @@ services:
     #   dockerfile: ./Dockerfile
     #   target: api
     ports:
-      - "${PORT}:${PORT}"
+      - "${PORT_API}:${PORT_API}"
     # depends_on:
     #   - postgres
     # restart: always
